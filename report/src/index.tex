@@ -1,0 +1,94 @@
+\maketitle
+
+\section*{Problem 1} \label{sec:problem1}
+
+% problem introduction
+\begin{tcolorbox}[colback=red!5!white,boxrule=0pt,frame empty]
+    Use wavelet decomposition (\verb|wavedec|) to decompose an audio signal (\verb|Q1.mat|, sample rate \verb|8192| Hz)
+    three level decomposition using \verb|db1|.
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Problem 1.a]
+    Plot the approximated and detailed coefficients.
+\end{tcolorbox}
+
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Problem 1.b]
+    Plot the reconstructed signal obtained using \verb|db1| and \verb|db2|.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Problem 1.c]
+    Hear (use \verb|sound| in MATLAB) the reconstructed signals using both wavelets.
+    Report your observations.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Problem 1.d]
+    Also, comment on the error obtained on the reconstructed signals for \verb|db1| and \verb|db2|.
+\end{tcolorbox}
+
+
+\ruler
+
+\section*{Problem 2} \label{sec:problem2}
+
+% problem introduction
+\begin{tcolorbox}[colback=green!5!white,boxrule=0pt,frame empty]
+    Add Gaussian noise ($\mu = 0$, $\sigma = 0.1$) to the original test
+    EEG signal (\verb|Q2.mat|).
+    Visualize both images (the original and its noisy version) side by side.
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=Problem 2.a]
+    Compute signal to noise ratio (SNR).
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=Problem 2.b]
+    Decompose the signal using wavedec (Haar, and db2).
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=Problem 2.c]
+    Plot the subbands obtained using Haar and db2 decomposition.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=Problem 2.d]
+    Observe the subbands and list your observations.
+\end{tcolorbox}
+
+
+\ruler
+
+
+\section*{Problem 3} \label{sec:problem3}
+
+% problem introduction
+\begin{tcolorbox}[colback=blue!5!white,boxrule=0pt,frame empty]
+    Perform DWT on the given EEG signal (\verb|Q3.mat|) and threshold the detail coefficients
+    the following way:
+    \vspace{0.5em}
+    \begin{itemize}
+        \item Select a threshold $T = \sigma \sqrt{2 \log(n)}$ where n is the number of detail coefficients 
+        and $\sigma$ is an estimate of the noise level.
+        \item Set all detail coefficients smaller than $T$ to zero.
+    \end{itemize}
+\end{tcolorbox}
+
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Problem 3.a]
+    Compute the SNR for different σ values and values of σ = {0.5, 1, 2, 4}.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Problem 3.b]
+    Plot the original, noisy, and denoised signal in anyone case.
+\end{tcolorbox}
+
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Problem 3.c]
+    Evaluate the RMSE and comment on your interpretations for each case.
+
+\end{tcolorbox}
