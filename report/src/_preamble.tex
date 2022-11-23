@@ -1,6 +1,7 @@
 \documentclass{article}
 
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{tcolorbox}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -15,6 +16,12 @@
 \newcommand{\ruler}{\par\noindent\rule{\textwidth}{0.5pt}}
 
 
+\newcommand{\todo}[1]{{\color{orange} \uppercase{\textit{#1}}}}
+\newcommand{\fix}[1]{{\color{red} \uppercase{\textit{#1}}}}
+\newcommand{\review}[1]{{\color{yellow} \uppercase{\textit{#1}}}}
+\newcommand{\done}[1]{{\color{green} \uppercase{\textit{#1}}}}
+
+
 \title{Advanced Signal Processing Assignment 3}
 \author{Kristoffer Plagborg Bak Sørensen}
 \date{\today}
@@ -22,3 +29,6 @@
 
 
 \begin{document}
+
+\maketitle
+

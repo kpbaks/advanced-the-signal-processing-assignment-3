@@ -1,6 +1,5 @@
-\maketitle
-
 \section*{Problem 1} \label{sec:problem1}
+
 
 % problem introduction
 \begin{tcolorbox}[colback=red!5!white,boxrule=0pt,frame empty]
@@ -10,14 +9,38 @@
 
 \vspace{0.5cm}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{./img/Q1.png}
+    \caption{The audio signal stored in $y$, sample rate 8192 Hz.}
+    \label{fig:Q1}
+\end{figure}
+
+\vspace{0.5cm}
+
+
 \begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Problem 1.a]
     Plot the approximated and detailed coefficients.
 \end{tcolorbox}
 
 
+\begin{figure}[H]
+    \centering
+    % thanks Jens
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{./img/problem1-1-approximated-and-detailed-coeffs.pdf}}
+
+    \caption{Approximated and detailed coefficients using DWT with \textit{db1} wavelet \textbf{6} levels deep. \todo{fix the y-axis limits.}}
+    \label{fig:Q1a}
+\end{figure}
+
+\todo{comment on the plot}
+
+
 \begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Problem 1.b]
     Plot the reconstructed signal obtained using \verb|db1| and \verb|db2|.
 \end{tcolorbox}
+
+
 
 \begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Problem 1.c]
     Hear (use \verb|sound| in MATLAB) the reconstructed signals using both wavelets.
@@ -80,7 +103,7 @@
 \vspace{0.5cm}
 
 \begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Problem 3.a]
-    Compute the SNR for different σ values and values of σ = {0.5, 1, 2, 4}.
+    Compute the SNR for different $\sigma$ values and values of $\sigma = \left \lbrace 0.5, 1, 2, 4 \right \rbrace$.
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Problem 3.b]
