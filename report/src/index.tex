@@ -40,6 +40,22 @@
     Plot the reconstructed signal obtained using \verb|db1| and \verb|db2|.
 \end{tcolorbox}
 
+Using db1 should give a very similar signal to the original signal, while using db2 should give a very different signal.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{./img/problem1-2-reconstructed-signal-db1.pdf}
+    \caption{Reconstructed signal using \textit{db1} wavelets.}
+    \label{fig:y_reconstructed_with_db1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{./img/problem1-2-reconstructed-signal-db2.pdf}
+    \caption{Reconstructed signal using \textit{db2} wavelets.}
+    \label{fig:y_reconstructed_with_db2}
+\end{figure}
 
 
 \begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Problem 1.c]
@@ -63,9 +79,22 @@
     Visualize both images (the original and its noisy version) side by side.
 \end{tcolorbox}
 
+
+\begin{lstlisting}[language=Python]
+mu = 0.0
+sigma = 3
+# gaussian noise
+noise = np.random.normal(mu, sigma, EEG.shape)
+EEG_with_noise = EEG + noise
+\end{lstlisting}
+
+
+
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{./img/problem2-1-EEG-signal-with-and-without-noise.pdf}
+    \makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{./img/problem2-1-EEG-signal-with-and-without-noise.pdf}}
+    % \includegraphics[width=\textwidth]{./img/problem2-1-EEG-signal-with-and-without-noise.pdf}
     \caption{The original EEG signal and its noisy version, where Gaussian noise with $\mu = 0$ and $\sigma = 3$ is added.}
     \label{fig:EEG_with_and_without_noise}
 \end{figure}
@@ -76,9 +105,18 @@
     Compute signal to noise ratio (SNR).
 \end{tcolorbox}
 
+
+\begin{equation}
+    \text{SNR} = 10 \log_{10} \left( \frac{\text{signal power}}{\text{noise power}} \right) = 12.17 \text{ dB}
+\end{equation}
+
+
+
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=Problem 2.b]
     Decompose the signal using wavedec (Haar, and db2).
 \end{tcolorbox}
+
+
 
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=Problem 2.c]
     Plot the subbands obtained using Haar and db2 decomposition.
@@ -110,7 +148,7 @@
 \vspace{0.5cm}
 
 \begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Problem 3.a]
-    Compute the SNR for different $\sigma$ values and values of $\sigma = \left \lbrace 0.5, 1, 2, 4 \right \rbrace$.
+    Compute the SNR for different $n$ values and values of $\sigma = \left \lbrace 0.5, 1, 2, 4 \right \rbrace$.
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Problem 3.b]
