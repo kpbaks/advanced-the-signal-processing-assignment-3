@@ -24,12 +24,13 @@ class CodeSnippet:
 
 
 DEFAULT_SILICON_ARGS: str = " ".join([
-    "--theme=Github",
+    "--theme=GitHub",
     "--no-line-number",
-
+    "--background=#ffffff",
+    "--shadow-blur-radius=15",
     "--no-window-controls",
     "--language=python",
-    # "--font='JetBrainsMono Nerd Font Mono'"
+    # r"--font='JetBrainsMono Nerd Font Mono'"
 ])
 
 DEFAULT_OUTPUT_FORMAT: str = "%f_%i_%s_%e.png"

@@ -115,14 +115,12 @@ The reconstruction error using \texttt{db1} wavelets is $2.721 \cdot 10^{-19} \a
 \end{tcolorbox}
 
 
-\begin{lstlisting}[language=Python]
-mu = 0.0
-sigma = 3
-# gaussian noise
-noise = np.random.normal(mu, sigma, EEG.shape)
-EEG_with_noise = EEG + noise
-\end{lstlisting}
-
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./img/code_snippets/applying_noise_to_signal.png}
+    \caption{Python code snippet for adding noise to a signal.}
+    \label{code_snippet:applying_noise_to_signal}
+\end{figure}
 
 \begin{figure}[H]
     \centering
@@ -145,7 +143,6 @@ EEG_with_noise = EEG + noise
     \text{SNR} = 10 \log_{10} \left( \frac{\text{signal power}}{\text{noise power}} \right) = 12.17 \text{ dB}
 \end{equation}
 
-\todo{show python SNR code}
 
 % -- PROBLEM 2.B --------------------------------------------------------------
 
@@ -153,20 +150,27 @@ EEG_with_noise = EEG + noise
     Decompose the signal using wavedec (Haar, and db2).
 \end{tcolorbox}
 
-
-
 % -- PROBLEM 2.C --------------------------------------------------------------
 
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=Problem 2.c]
     Plot the subbands obtained using Haar and db2 decomposition.
 \end{tcolorbox}
 
+\begin{figure}[H]
+    \centering
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{./img/problem2c_haar_and_db2_subband_decomposition.pdf}}
+    \caption{Subbands of the EEG signal using \texttt{haar} and \texttt{db2} wavelets.}
+    \label{fig:problem2c_haar_and_db2_subband_decomposition}
+\end{figure}
 
 % -- PROBLEM 2.D --------------------------------------------------------------
 
 \begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=Problem 2.d]
     Observe the subbands and list your observations.
 \end{tcolorbox}
+
+Figure \ref{fig:problem2c_haar_and_db2_subband_decomposition} shows the subbands of the EEG signal using \texttt{haar} and \texttt{db2} wavelets. Looking at all of the coefficients, both approximate and detail, for both wavelets i.e. column 1 and 2 in \ref{fig:problem2c_haar_and_db2_subband_decomposition} it is very diffecult to see any difference between the two wavelets. The coefficients are very similar, and the difference is not immediately noticeable. The third column shows the coefficients of both wavelets zoomed in on the sample interval $[100, 150]$. In this view the difference between the two wavelets are more apparent. For \texttt{cD1} and \texttt{cD2} there is a difference between the captured frequency. In \texttt{cD3} the detail coefficients are almost identical, and for \texttt{cA3} the approximate coefficients are almost identical, only differing in the phase.
+
 
 
 \ruler
