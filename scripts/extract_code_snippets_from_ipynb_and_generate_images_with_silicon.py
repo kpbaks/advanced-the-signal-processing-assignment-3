@@ -8,11 +8,19 @@ import subprocess
 import logging
 import re
 from typing import Optional
-
+from dataclasses import dataclass
 
 import nbformat # pip install nbformat
 
 
+@dataclass
+class CodeSnippet:
+    line_start: int
+    line_end: int
+    text: str
+    language: Optional[str] = None
+    output_filename: Optional[str] = None
+    
 
 
 DEFAULT_SILICON_ARGS: str = " ".join([
@@ -34,10 +42,10 @@ if __name__ == '__main__':
         print('silicon not found. Please install it first.')
         sys.exit(1)
 
+    
+    name_of_this_script = os.path.basename(__file__)
     # create logger
-    logger = logging.getLogger('extract_code_snippets_from_ipynb_and_generate_images_with_silicon')
-
-
+    logger = logging.getLogger(name_of_this_script)
 
     parser = argparse.ArgumentParser()
     parser.add_argument('notebook', type=str, help='path to the notebook')
@@ -71,7 +79,7 @@ if __name__ == '__main__':
     if args.output_format is None:
         args.output_format = DEFAULT_OUTPUT_FORMAT
 
-    code_snippets = []
+    code_snippets: list[CodeSnippet] = []
 
     start_delimiter_regex = re.compile(r'^\s*#\s*silicon: start\s*\((.+)\)\s*$')
     end_delimiter_regex = re.compile(r'^\s*#\s*silicon: end\s*$')
@@ -95,14 +103,24 @@ if __name__ == '__main__':
                 # there might be more than one `# silicon: start` or `# silicon: end`
                 # per cell, so we need to reset the start and end indices
                 if start is not None and end is not None:
-                    code_snippets.append({
-                        'start': start,
-                        'end': end,
-                        'lines' : cell.source.splitlines()[start:end + 1],
-                        'cell_id': cell_id,
-                        'snippet_id': len(code_snippets)
-                        'output_filename': output_filename
-                    })
+                    code_snippets.append(CodeSnippet(
+                        line_start=start,
+                        line_end=end,
+                        text=cell.source.splitlines()[start:end+1],
+                        language='python',
+                        output_filename=output_filename
+                    ))
+
+                    # code_snippets.append({
+                    #     'start': start,
+                    #     'end': end,
+                    #     'lines' : cell.source.splitlines()[start:end + 1],
+                    #     'cell_id': cell_id,
+                    #     'snippet_id': len(code_snippets)
+                    #     'output_filename': output_filename
+                    # })
+
+
                     start = None
                     end = None
                     output_filename = None
@@ -110,31 +128,40 @@ if __name__ == '__main__':
 
     for i, code_snippet in enumerate(code_snippets):
         # create temporary file with the code snippet
-        lines = code_snippet['lines']
-        start = code_snippet['start']
-        end = code_snippet['end']
+
+        # lines = code_snippet['lines']
+        # start = code_snippet['start']
+        # end = code_snippet['end']
+
         with tempfile.NamedTemporaryFile(mode='w', delete=True) as tmp_file:    
-            tmp_file.write('\n'.join(lines))
+            tmp_file.write('\n'.join(code_snippet.text))
             tmp_file.flush()
 
             # run silicon on the temporary file
             # generate the image in the output directory
 
-            output_filename = args.output_format
-            for placeholder, replacement in [
-                ('%f', os.path.basename(args.notebook)), # filename without extension
-                ('%c', str(code_snippet['cell_id'])), # cell number
-                ('%s', str(start)),
-                ('%e', str(end)),
-                ('%i', str(code_snippet['snippet_id'])) # snippet id
-            ]:
-                output_filename = output_filename.replace(placeholder, replacement)
-
-            print (output_filename)
-
-            output_file = os.path.join(args.output_dir, output_filename)
+# remove the extension from the filename
+            filename_without_extension = os.path.splitext(os.path.basename(args.notebook))[0]
             
-            print(f'generating image for snippet {i} in cell {code_snippet["cell_id"]} from line {start} to line {end} in file {args.notebook} to {output_file}')
+            if code_snippet.output_filename is None:
+                output_filename = args.output_format
+                for placeholder, replacement in [
+                    ('%f', filename_without_extension), # filename without extension
+                    # ('%c', str(code_snippet['cell_id'])), # cell number
+                    ('%s', str(code_snippet.line_start)), # line start
+                    ('%e', str(code_snippet.line_end)), # line end
+                    ('%i', str(i)) # snippet id
+                ]:
+                    output_filename = output_filename.replace(placeholder, replacement)
+                
+                code_snippet.output_filename = output_filename
+            
+
+            print (code_snippet.output_filename)
+
+            output_file = os.path.join(args.output_dir, code_snippet.output_filename)
+            
+            print(f'generating image for snippet {i} from line {code_snippet.line_start} to line {code_snippet.line_end} in file {args.notebook} to {code_snippet.output_filename}')
             cmd = 'silicon {} {} --output {}'.format(args.silicon_args, tmp_file.name, output_file)
             logger.debug(cmd.split())
             print(cmd)

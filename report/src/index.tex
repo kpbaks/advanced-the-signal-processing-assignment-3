@@ -31,13 +31,10 @@
     \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{./img/problem1-1-approximated-and-detailed-coeffs.pdf}}
 
     \caption{Approximated and detailed coefficients using DWT with \textit{db1} wavelet \textbf{3} levels deep. }
-    \label{fig:Q1a}
+    \label{fig:problem1a}
 \end{figure}
 
-\todo{this is not the up to date figure}
-
-\todo{comment on the plot}
-
+Figure \ref{fig:problem1a} shows the approximated and detailed coefficients computed using the \texttt{DWT} 3 levels deep using the \texttt{db1} wavelet. Both the approximate and the detailed coefficients have been resampled to have the same number of samples as the input signal in \texttt{Q1.mat}. This is done, to have a better visual representation of the coefficients. The first subplot at the top of the figure with the orange plot, are the approximated coefficients. Looking at the zoomed in interval, we can see that the coefficients are at a lower frequency that the input signal. This matches the theory, where the approximated coefficients are the frequency content at a lower frequency subband. The second, third and fourth subplots are the detailed coefficients at different transform levels. As the \texttt{DWT} is applied at the further levels the detail coefficients will be at a lower frequency compared to previous levels. This is also visible in the figure, where the detail coefficients at level 3 are at a lower frequency than the detail coefficients at level 2 etc.
 
 % -- PROBLEM 1.B --------------------------------------------------------------
 
@@ -63,6 +60,8 @@ Using db1 should give a very similar signal to the original signal, while using 
 \end{figure}
 
 
+Figure \ref{fig:y_reconstructed_with_db1} and Figure \ref{fig:y_reconstructed_with_db2} shows the reconstructed signal using \textit{db1} and \textit{db2} wavelets respectively. The signal reconstructed using \textit{db1} wavelets is similar to the original signal, while the signal reconstructed using \textit{db2} wavelets is different. The difference is noticeable, especially, when zooming in on the signal, as can be seen in the third subplot of Figure \ref{fig:y_reconstructed_with_db2}, where the reconstructed signal does not overlap with the original signal. Instead the reconstructed appears to contain more higher frequency components. 
+
 % -- PROBLEM 1.C --------------------------------------------------------------
 
 \begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Problem 1.c]
@@ -70,8 +69,9 @@ Using db1 should give a very similar signal to the original signal, while using 
     Report your observations.
 \end{tcolorbox}
 
-Using db1 the reconstructed signal is very similar to the original signal, while using db2 the reconstructed signal is noticeably different from the original signal. The difference is noticeable when listening to the reconstructed signal using db2. The difference heard is that the reconstructed signal using db2 is more noisy than the reconstructed signal using db1. \todo{finish sentence}
+No audible difference can be heard between the \texttt{db1} reconstructed signal, and the original one. The vocals are clear, and no distortions are noticeable.
 
+Listening to the audio of the reconstructed signal using \texttt{db2} wavelet, the vocals are still discernable, but the audio is distorted. The distortion is noticeable, and the audio is not as clear as the \texttt{db1} reconstructed signal.
 
 % -- PROBLEM 1.D --------------------------------------------------------------
 
@@ -79,14 +79,29 @@ Using db1 the reconstructed signal is very similar to the original signal, while
     Also, comment on the error obtained on the reconstructed signals for \verb|db1| and \verb|db2|.
 \end{tcolorbox}
 
+The error is calculated as the root mean squared error \textit{RMSE} between the original signal and the reconstructed signal, using the following formula:
 
-\todo{comment on the error}
+\begin{equation}
+    \text{RMSE}(x,y) = \sqrt{\frac{1}{N}\sum_{i=1}^{N}(x_i - y_{i})^2}
+\end{equation}
 
-$$2.721e-19$$ % error for db1
-$$1.001e-03$$ % error for db2
+\begin{table}[H]
+    \label{tbl:reconstruction_error_with_db1_and_db2}
+    \centering
+
+    \begin{tabular}{c|c}
+        \hline
+        wavelet & RMSE \\
+        \hline
+        \texttt{db1} & $2.721 \cdot 10^{-19} \approx 0 $ \\
+        \texttt{db2} & $1.001 \cdot 10^{-03}$ \\
+    \end{tabular}
+
+    \caption{Reconstruction error using \texttt{db1} and \texttt{db2} wavelets.}
+\end{table}
 
 
-
+The reconstruction error using \texttt{db1} wavelets is $2.721 \cdot 10^{-19} \approx 0$, while the reconstruction error using \texttt{db2} wavelets is $1.001 \cdot 10^{-03}$. The reconstruction error using \texttt{db1} wavelets is very small, and can be considered zero, with the minute difference from zero being due to the finite floating point representation. The reconstruction error using \texttt{db2} wavelets is much larger, and is noticeable when listening to the audio.
 
 \ruler
 
