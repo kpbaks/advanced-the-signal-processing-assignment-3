@@ -299,8 +299,6 @@ Figure \ref{fig:problem3thresholding} shows the detail coefficients of the \text
     Evaluate the RMSE and comment on your interpretations for each case.
 \end{tcolorbox}
 
-\todo{finish}
-
 \begin{table}[H]
     \label{tbl:rmse_values_for_different_sigmas}
     \centering
@@ -320,3 +318,6 @@ Figure \ref{fig:problem3thresholding} shows the detail coefficients of the \text
 
     \caption{The RMSE for different values of $\sigma$.}
 \end{table}
+
+
+Looking at the SNR in \tblref{tbl:snr_values_for_different_sigmas} 2 one can see that the SNR is the same for all values of $\sigma$. The same is true when looking at the RMSE in \tblref{tbl:rmse_values_for_different_sigmas} 3. In Figure \ref{fig:problem3b_plot1}, \ref{fig:problem3b_plot2}, \ref{fig:problem3b_plot3}, \ref{fig:problem3b_plot4} and \ref{fig:problem3b_plot5} shows a plot of the original, noisy and denoised signal for different $\sigma$ values respectively. All of plots shows that using the DWT transform with thresholding, can be used to denoise the EEG signal with a good result. The findings presented also shows that the thresholding is not dependent on the value of $\sigma$, which could indicate that most of the signal is in the low frequency band i.e. the approximate coefficients, and not in the high frequency band i.e. the detail coefficients that are being thresholded.
